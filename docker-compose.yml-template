@@ -13,6 +13,7 @@ services:
       - ##PREFIX##-net
     volumes:
       - ##PREFIX##-shiny-apps:/srv/shiny-server/:rw
+      - ##PREFIX##-shiny-tmp:/tmp:rw
       - ##PREFIX##-shiny-log:/var/log/shiny-server/:rw
       - /srv/tmpe/:/tmp:rw
     restart: always
@@ -25,6 +26,8 @@ networks:
 
 volumes:
   ##PREFIX##-shiny-apps:
+    external: true
+  ##PREFIX##-shiny-tmp:
     external: true
   ##PREFIX##-shiny-log:
     external: true
