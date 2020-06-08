@@ -1,0 +1,30 @@
+version: '2.0'
+services:
+  ##PREFIX##-shiny:
+    #image: rocker-shiny-verse
+    container_name: ##PREFIX##-shiny
+    image: ##PREFIX##-shiny
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - domain=##OUTERHOST##
+    networks:
+      - ##PREFIX##-net
+    volumes:
+      - ##PREFIX##-shiny-apps:/srv/shiny-server/:rw
+      - ##PREFIX##-shiny-log:/var/log/shiny-server/:rw
+      - /srv/tmpe/:/tmp:rw
+    restart: always
+    ports:
+      - 3838:3838
+
+networks:
+  ##PREFIX##-net:
+    external: true
+
+volumes:
+  ##PREFIX##-shiny-apps:
+    external: true
+  ##PREFIX##-shiny-log:
+    external: true

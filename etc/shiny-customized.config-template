@@ -1,0 +1,59 @@
+
+
+# Define a server that listens on port 3838
+server {
+  listen 3839;
+
+  run_as root;
+
+  # Define a location at the base URL
+  location / {
+
+    # Host the directory of Shiny Apps stored in this directory
+    site_dir /srv/shiny-server;
+
+    # Log all Shiny output to files in this directory
+    log_dir /var/log/shiny-server;
+
+    # When a user visits the base URL rather than a particular application,
+    # an index of the applications available in this directory will be shown.
+    directory_index on;
+  }
+}
+
+
+
+#server {
+#
+#  listen 80;
+#
+##  base_url https://##OUTERHOST##/shiny;
+#
+#  run_as root;
+#
+#  log_dir /var/log/shiny-server;
+#
+#  # Define the location '/singleapps'
+##  location / {
+##    # Run this location in 'app_dir' mode, which will host a single Shiny
+##    # Application available at '/srv/shiny-server/myApp'
+##    app_dir /srv/shiny-server;
+##  }
+#
+##  location /singleapps {
+##    # Run this location in 'app_dir' mode, which will host a single Shiny
+##    # Application available at '/srv/shiny-server/myApp'
+##    app_dir /srv/shiny-server/sa;
+##  }
+##  
+#  # Define the location '/otherapps'
+##  location / {
+##    # Run this location in 'site_dir' mode, which hosts the entire directory
+##    # tree at '/srv/shiny-server/apps'
+##    site_dir /srv/shiny-server/;
+##  }
+#
+#    # Provide a default/global GAID
+##    google_analytics_id "UA-12345-1";
+#
+#}
