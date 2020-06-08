@@ -1,26 +1,31 @@
 
-  location /shiny {
-        proxy_pass       http://##PREFIX##-shiny:3839;
+
+
+#  location /shiny {
+#        proxy_pass       http://##PREFIX##-shiny:3838;
+#        redirect http://##OUTERHOST##:3838;
 #      proxy_redirect / $scheme://$http_host/shiny/;
- }
+#      server_name http://##OUTERHOST##:3838;
+# }
 
 #  rewrite ^/shiny$ $scheme://$http_host/shiny/ permanent;
+      rewrite     ^/shiny$ $scheme://##OUTERHOST##:3838$request_uri? permanent;
 #
-#  location /shiny {
-#      rewrite ^/shiny/(.*)$ /$1 break;
-#        proxy_pass       http://##PREFIX##-shiny/;
-#      proxy_redirect / $scheme://$http_host/shiny/;
-#
-#        proxy_http_version    1.1;
-#        proxy_set_header      Upgrade $http_upgrade;
-#        proxy_set_header      Connection "upgrade";
-#        proxy_set_header X-Real-IP $remote_addr;
-#        proxy_set_header Connection keep-alive;
-#        proxy_set_header Host $host;
-#        proxy_cache_bypass $http_upgrade;
-#        proxy_read_timeout 20d;
-#        proxy_buffering off;
-#  }
+  location /shiny {
+      rewrite ^/shiny/(.*)$ /$1 break;
+        proxy_pass       http://##PREFIX##-shiny:3838;
+      proxy_redirect / $scheme://$http_host/shiny/;
+
+        proxy_http_version    1.1;
+        proxy_set_header      Upgrade $http_upgrade;
+        proxy_set_header      Connection "upgrade";
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Connection keep-alive;
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_read_timeout 20d;
+        proxy_buffering off;
+  }
 #
 #  location /shiny-admin/ {
 #      rewrite ^/shiny-admin/(.*)$ /$1 break;
