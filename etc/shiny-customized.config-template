@@ -1,16 +1,14 @@
-
+# Instruct Shiny Server to run applications as the user "shiny"
+run_as shiny;
 
 # Define a server that listens on port 3838
 server {
-  listen 3839;
+  listen 3838;
 
-  run_as root;
-
-  # Define a location at the base URL
   location / {
 
     # Host the directory of Shiny Apps stored in this directory
-    site_dir /srv/shiny-server;
+    site_dir /mnt/report;
 
     # Log all Shiny output to files in this directory
     log_dir /var/log/shiny-server;

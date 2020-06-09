@@ -12,22 +12,23 @@ services:
     networks:
       - ##PREFIX##-net
     volumes:
-      - ##PREFIX##-shiny-apps:/srv/shiny-server/:rw
-      - ##PREFIX##-shiny-tmp:/tmp:rw
+      - ##PREFIX##-report:/mnt/report/:rw
+#      - ##PREFIX##-report:/srv/shiny-server/:rw
+#      - ##PREFIX##-shiny-apps:/srv/shiny-server/:rw
       - ##PREFIX##-shiny-log:/var/log/shiny-server/:rw
-      - /srv/tmpe/:/tmp:rw
+      - ##PREFIX##-shiny-tmp:/tmp:rw
     restart: always
-    ports:
-      - 3838:3838
 
 networks:
   ##PREFIX##-net:
     external: true
 
 volumes:
-  ##PREFIX##-shiny-apps:
+  ##PREFIX##-report:
     external: true
+#  ##PREFIX##-shiny-apps:
+#    external: true
   ##PREFIX##-shiny-tmp:
-    external: true
+    external: false
   ##PREFIX##-shiny-log:
     external: true

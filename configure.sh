@@ -8,18 +8,17 @@ DOCKER_HOST=$DOCKERARGS
 DOCKER_COMPOSE_FILE=$RF/docker-compose.yml
 
 SHINY_LOG=$LOG_DIR/${MODULE_NAME}
-SHINY_DATA=$DATA_DIR/${MODULE_NAME}
+#SHINY_DATA=$DATA_DIR/${MODULE_NAME}
 SHINY_TMP=$DATA_DIR/${MODULE_NAMEi}_tmp
 
-  ##PREFIX##-shiny-apps:
 case $VERB in
   "build")
     echo "1. Configuring ${PREFIX}-${MODULE_NAME}..."
 
 
-    mkdir -p $SHINY_LOG $SHINY_DATA $SHINY_TMP
+    mkdir -p $SHINY_LOG $SHINY_TMP #$SHINY_DATA
     docker $DOCKERARGS volume create -o type=none -o device=$SHINY_LOG -o o=bind ${PREFIX}-${MODULE_NAME}-log
-    docker $DOCKERARGS volume create -o type=none -o device=$SHINY_DATA -o o=bind ${PREFIX}-${MODULE_NAME}-apps
+#    docker $DOCKERARGS volume create -o type=none -o device=$SHINY_DATA -o o=bind ${PREFIX}-${MODULE_NAME}-apps
     docker $DOCKERARGS volume create -o type=none -o device=$SHINY_TMP -o o=bind ${PREFIX}-${MODULE_NAME}-tmp
 
     cp Dockerfile etc/index.html $RF/
