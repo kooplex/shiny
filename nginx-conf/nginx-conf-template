@@ -16,6 +16,11 @@
         proxy_buffering off;
   }
 
+
+  location /shiny/logs {                                                                                                                                                                                             
+	root /var/log/nginx/otherlogs;
+  } 
+
 #  location /shiny-admin/ {
 #      rewrite ^/shiny-admin/(.*)$ /$1 break;
 #        proxy_pass       http://##PREFIX##-shiny/;
